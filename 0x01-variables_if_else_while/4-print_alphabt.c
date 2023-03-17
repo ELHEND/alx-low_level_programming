@@ -1,8 +1,10 @@
 #include <stdio.h>
+
 /**
- * main - Entry point
- * Description 'print alphabets except q and e'
- */
+ ** main - Entry point
+ **
+ ** Return: Always 0 (Success)
+ **/
 int main(void)
 {
 char letter;
