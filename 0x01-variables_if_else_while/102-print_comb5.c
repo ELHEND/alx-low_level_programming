@@ -1,4 +1,4 @@
-nclude <stdio.h>
+ #include <stdio.h>
 /**
  ** main - Entry point
  ** Description: write a program that prints all possible
