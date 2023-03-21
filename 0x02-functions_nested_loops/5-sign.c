@@ -1,8 +1,10 @@
 #include "main.h"
 /**
- ** print_sign - a function that prints the sign of a number
- ** @n: number input
- ** Return: 1 prints '+' if n > 0, 0 prints '0' if n = 0, -1 prints '-' if n < 0
+ ** main - Entry point
+ **
+ ** Description: print all single digit numbers
+ **
+ ** Return: Always 0 (Success)
  **/
 int print_sign(int n)
 {
