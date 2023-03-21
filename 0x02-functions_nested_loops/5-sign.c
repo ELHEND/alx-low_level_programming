@@ -1,11 +1,12 @@
 #include "main.h"
 /**
- ** main - Entry point
- **
- ** Description: print all single digit numbers
- **
- ** Return: Always 0 (Success)
- **/
+ *print_sign-Determines if the input numbern
+ *greater, iqual or less than zero.
+ *en: the input mumber as an integer.
+ *
+ * Return:1 is greater than zero. 0 is zero.
+ * -1 is less than zero.
+ */
 int print_sign(int n)
 {
 if (n > 0)
