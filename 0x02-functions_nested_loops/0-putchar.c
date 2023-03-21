@@ -1,17 +1,16 @@
-#include <"unistd.h">
+#include <unistd.h>
  /**
   ** main - Entry point
   **
   ** Return: Always 0 (Success)
   **/
- int main(void)
+int main(void)
 {
-char *sh = "Holberton";
-while (*sh)
+char c[] = "_putchar\n";
+int i;
+for (i = 0; c[i] != '\0'; i++)
 {
-_putchar(*sh);
-sh++;
+_putchar(c[i]);
 }
-_putchar('\n');
-return (0);
+return (0);
 }
