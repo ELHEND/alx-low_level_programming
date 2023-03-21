@@ -10,11 +10,11 @@ char(ch);
 int i;
 for (i = 0; i < 10; i++)
 {
-ch = 'a';						       
+ch = 'a';
 while (ch <= 'z')
 {
 _putchar(ch);
-ch++;							
+ch++;
 }
 _putchar('\n');
 }
