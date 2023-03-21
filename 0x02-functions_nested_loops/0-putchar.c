@@ -1,16 +1,15 @@
 #include "holberton.h"
  /**
   ** main - Entry point
-  **
+  ** 
   ** Return: Always 0 (Success)
   **/
  int main(void)
 {
-char *sh = "Holberton"
-char *sh = "Holberton";
-while (*sh)
+char *sh = "Holberton"; 
+while (*sh)	
 {
-_putchar(*sh);
+putchar(*sh);
 sh++;
 }
 _putchar('\n');
