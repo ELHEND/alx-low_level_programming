@@ -14,10 +14,10 @@ while (i < 50)
 next = a + b;
 a = b;
 b = next;
-prntf("%lu", next);
+putchar("%lu", next);
 if (i < 49)
 { 	
-printf(", ");	
+putchar(", ");	
 }
 i++;
 }					
