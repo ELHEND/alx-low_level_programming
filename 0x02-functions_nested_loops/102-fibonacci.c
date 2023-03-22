@@ -1,4 +1,4 @@
-#include "main.h" 
+
 #include <stdio.h>
 /**
  ** main - main block
@@ -15,13 +15,13 @@ while (i < 50)
 next = a + b;
 a = b;
 b = next;
-putchar("%lu", next);
+printf("%lu", next);
 if (i < 49)
 { 	
-putchar(", ");	
+printf(", ");	
 }
 i++;
 }					
-putchar('\n');
+printf('\n');
 return (0);
 }
