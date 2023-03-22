@@ -1,4 +1,3 @@
-#include "main.h"
 #include <stdio.h>
 /**
  ** main - main block
@@ -22,6 +21,6 @@ printf(", ");
 }
 i++;
 }					
-printf('\n');
+printf("\n");
 return (0);
 }
