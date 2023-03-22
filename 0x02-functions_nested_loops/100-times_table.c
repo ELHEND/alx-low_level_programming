@@ -7,28 +7,38 @@
  **
  ** Return: Always 0 (Success)
  **/
-int main(void)
+int r;
+int n;
+for(int i = 0; i <= 9; i++) 
 {
-int digit1 = 0, digit2;
-while (digit1 <= 9)
+for(int j = 0; j <= 9; j++)
 {
-digit2 = 0;
-while (digit2 <= 9)
+r = i * j;		            
+if(j == 0)
 {
-if (digit1 != digit2 && digit1 < digit2)
-{
-putchar(digit1 + 48);
-putchar(digit2 + 48);
-if (digit1 + digit2 != 17)
-{
+putchar(r +'0');
 putchar(',');
+}
+else if(j > 0 && r <= 9){
 putchar(' ');
+putchar(' ');
+putchar(r+'0');
+if(j != 9) 
+} 
+putchar(',');
 }
 }
-digit2++;
+else
+{
+n = r % 10;
+r = r / 10;
+putchar(' ');
+putchar(r+'0');
+putchar(n+'0');
+if(j != 9){
+putchar(',');
 }
-digit1++;
+}
 }
 putchar('\n');
-return (0);
 }
