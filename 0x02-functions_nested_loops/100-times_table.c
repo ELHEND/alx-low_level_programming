@@ -1,45 +1,37 @@
-#include<main.h>
+#include "main.h"
 /**
- ** main - Entry point
- **
- ** Description: print all possible different
- **           combinations of two digits.
- **
- ** Return: Always 0 (Success)
+ ** print_times_table - prints times table
+ ** @n: times table to use
+ ** Return: void
  **/
-int main (void) 
-int r;
-int n;
-for(int i = 0; i <= 9; i++) 
+
+void print_times_table(int n)
 {
-for(int j = 0; j <= 9; j++)
+int a = 0, rep, b;
+if (n < 0 || n > 15)
+return;
+while (a <= n)
 {
-r = i * j;		            
-if(j == 0)
+for (b = 0; b <= n; b++)
 {
-putchar(r +'0');
-putchar(',');
+rep = a * b;										
+if (b == 0)													
+_putchar('0' + rep);												
+else if (rep < 10)															
+{																			
+_putchar(' ');	
+_putchar(' ');																				_putchar('0' + rep);																			}												
+else if (rep < 100)
+{																					_putchar(' ');																				_putchar('0' + rep / 10);																
+_putchar('0' + rep % 10);																		}													
+else																			
+{																					_putchar('0' + rep / 100);
+_putchar('0' + (rep - 100) / 10);																	_putchar('0' + rep % 10);																		}															
+if (b < n)
+{																					_putchar(',');								
+_putchar(' ');																				}
+}				
+_putchar('\n');					
+a++;
 }
-else if(j > 0 && r <= 9){
-putchar(' ');
-putchar(' ');
-putchar(r+'0');
-if(j != 9) 
-} 
-putchar(',');
-}
-}
-else
-{
-n = r % 10;
-r = r / 10;
-putchar(' ');
-putchar(r+'0');
-putchar(n+'0');
-if(j != 9){
-putchar(',');
-}
-}
-}
-putchar('\n');
 }
