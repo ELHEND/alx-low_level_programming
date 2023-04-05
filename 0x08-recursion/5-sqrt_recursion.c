@@ -1,35 +1,34 @@
-#include "main.h"
-int actual_sqrt_recursion(int n , int i);
 /**
- * _sqrt_recursion - returns the natural aquare root of a number
- * @n:number to calculate the square root of
- * Return:The resulting square root
+ * _sqrt_recursion - returns the natural square root of a number
+ * @n: the number to find the square root of
  *
- *
+ * Return: the square root of n, or -1 if n does not have a natural square root
  */
-
-int _sqr_recursion(int n)
+int _sqrt_recursion(int n)
 {
-
-if (n < 0)
+/* base cases */
+if (n < 0) /* negative input */
 return (-1);
+else if (n == 0 || n == 1) /* square root is itself */
+return (n);
 
-return (actual_sqrt_recursion(n, 0));
-}
-/**
- * actual_sqrt_recursion - recursion to find the natura
- *
- * square root of anumber
- * @n:number to calculate the sqaure root of
- * @m:iterator
- * Return:The resulting square root
- *
+/*
+ * recursive case:
+ * we check each number from 1 to n/2,
+ * trying to find a number whose square equals
  */
-int actual_sqrt_recursion(int n, int m)
+int i;
+for (i = 1; i <= n / 2; i++)
 {
-if (m * m > n)
-return (-1);
-if (m * m == n)
-return (m);
-return (actual_sqrt_recursion(n, m + 1));
+if (i * i == n) /* square found */
+return (i);
 }
+
+/* if we haven't found a square, recurse with n-1 */
+int sqrt = _sqrt_recursion(n - 1);
+if (sqrt == -1) /* no square found */
+return (-1);
+else /* found square */
+return (sqrt);
+}
+
