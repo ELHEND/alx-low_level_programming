@@ -44,7 +44,7 @@ return (1 + _strlen_recursion(s + 1));
 
 }
 /**
- *_check_pal - checks the characters recursively for palindrome
+ * check_pal - checks the characters recursively for palindrome
  *
  * @s: string to check
  *
@@ -56,12 +56,14 @@ return (1 + _strlen_recursion(s + 1));
  *
  */
 
-int _check_pal(char *s, int i, int len)
+int check_pal(char *s, int i, int len)
 
 {
+
 if (*(s + i) != *(s + len - 1))
 
 return (0);
+
 if (i >= len)
 
 return (1);
