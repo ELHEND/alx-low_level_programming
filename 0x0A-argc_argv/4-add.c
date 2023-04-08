@@ -1,42 +1,43 @@
 #include <stdio.h>
-#include "main.h"
+#include <stdlib.h>
 
 /**
- * is_positive_number - checks if a string represents a positive number
+ * is_digit - check if a string contains only digits
  * @s: the string to check
  *
- * Return: 1 if s is a positive number, 0 otherwise
+ * Return: 1 if the string contains only digits, 0 otherwise
  */
-int is_positive_number(const char *s)
+int is_digit(char *s)
 {
-while (*s != '\0')
-{
-if (*s < '0' || *s > '9')
+int m;
+
+for (m = 0; s[m]; m++)
+if (s[m] < '0' || s[m] > '9')
 return (0);
-s++;
-}
 return (1);
 }
-
 /**
- * main - adds positive numbers passed as command-line arguments
- * @argc: the number of arguments
- * @argv: the array of arguments
- * Return: 0 if successful, 1 if there was an error
+ * main - Entry point. Adds positive numbers passed as arguments.
+ * @argc: The number of arguments
+ * @argv: An array of pointers to the arguments
+ *
+ * Return: 0 if the program ran successfully, 1 otherwise
  */
 int main(int argc, char **argv)
 {
 int sum = 0;
-for (int i = 1; i < argc; i++)
+int m;
+
+for (m = 1; m < argc; m++)
 {
-if (!is_positive_number(argv[i]))
+if (!is_digit(argv[m]))
 {
 printf("Error\n");
 return (1);
 }
-sum += atoi(argv[i]);
+sum += atoi(argv[m]);
 }
 printf("%d\n", sum);
+
 return (0);
 }
-
