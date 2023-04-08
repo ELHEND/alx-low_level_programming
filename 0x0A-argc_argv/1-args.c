@@ -8,8 +8,10 @@
  *
  * Return: Always 0 (Success)
  */
+
 int main(int argc, char *argv[])
 {
-puts((argc == 1) ? "0" : (argc - 1 + '0'));
+printf("%d\n", argc > 1 ? argc - 1 : 0);
 return (0);
 }
+
