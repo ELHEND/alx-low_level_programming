@@ -9,8 +9,9 @@
  * Return: Always 0 (Success)
  */
 
+
 int main(int argc, char *argv[])
 {
-printf("%d\n", argc - 1); // subtract 1 to exclude program name as an argument
-return (0);
+puts((argc == 1) ? "0" : (argc - 1 + '0'));
 }
+
