@@ -9,16 +9,14 @@
  * Return: Always 0 (Success)
  */
 
+
 int main(int argc, char *argv[])
 {
-int num_args = 0;
-
-while (*++argv)
+int count = 0;
+while (*(++argv))
 {
-
-num_args++;
+count++;
 }
-printf("%d\n", num_args);
+printf("%d\n", count);
 return (0);
 }
-
