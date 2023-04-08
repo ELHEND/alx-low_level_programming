@@ -24,7 +24,7 @@ if (s[m] == '-')
 ++x;
 if (s[m] >= '0' && s[m] <= '9')
 {
-digit = s[m] - '0';																	
+digit = s[m] - '0';
 if (x % 2)
 digit = -digit;
 n = n * 10 + digit;
@@ -33,7 +33,7 @@ if (s[m + 1] < '0' || s[m + 1] > '9')
 break;
 f = 0;
 }
-i++;
+m++;
 }
 if (f == 0)
 return (0);
@@ -53,8 +53,8 @@ for (i = 1; i < argc; i++)
 {
 for (j = 0; argv[i][j] != '\0'; j++)
 {
-if (argv[i][j] > '9' || argv[i][j] < '0')	 
-puts("Error");					
+if (argv[i][j] > '9' || argv[i][j] < '0')
+puts("Error");
 return (1);
 }
 }
