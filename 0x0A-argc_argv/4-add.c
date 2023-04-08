@@ -48,13 +48,13 @@ return (n);
  */
 int main(int argc, char *argv[])
 {
-int sum, num, i, j, p;
+int sum, num, m, j, p;
 sum = 0;
-for (i = 1; i < argc; i++)
+for (m = 1; m < argc; m++)
 {
-for (j = 0; argv[i][j] != '\0'; j++)
+for (j = 0; argv[m][j] != '\0'; j++)
 {
-if (argv[i][j] > '9' || argv[i][j] < '0')
+if (argv[m][j] > '9' || argv[m][j] < '0')
 puts("Error");
 return (1);
 }
