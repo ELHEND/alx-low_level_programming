@@ -11,7 +11,14 @@
 
 int main(int argc, char *argv[])
 {
-printf("%d\n", argc > 1 ? argc - 1 : 0);
+int num_args = 0;
+
+while (*++argv)
+{
+
+num_args++;
+}
+printf("%d\n", num_args);
 return (0);
 }
 
