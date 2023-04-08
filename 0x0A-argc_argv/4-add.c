@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-
+#include "main.h"
 /**
  * is_positive_number - checks if a string represents a positive number
  * @s: the string to check
