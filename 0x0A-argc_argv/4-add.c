@@ -39,6 +39,7 @@ if (f == 0)
 return (0);
 return (n);
 }
+
 /**
  * main - adds two positive number
  * @argc: number of arguments
@@ -67,6 +68,7 @@ if (num >= 0)
 sum += num;
 }
 }
+
 printf("%d\n", sum);
 return (0);
 }
