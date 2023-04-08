@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include "main.h"
 /**
  * is_positive_number - checks if a string represents a positive number
@@ -32,7 +31,7 @@ for (int i = 1; i < argc; i++)
 if (!is_positive_number(argv[i]))
 {
 printf("Error\n");
-					
+
 return (1);
 
 }
