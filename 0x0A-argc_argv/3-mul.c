@@ -6,7 +6,8 @@
  * @s: string to be converted
  * Return: the int converted from the string
  */
-int _atoi(char *s){
+int _atoi(char *s)
+{
 int m, d, n, len, f, digit;
 m = 0;
 d = 0;					
@@ -31,7 +32,7 @@ if (s[m + 1] < '0' || s[m + 1] > '9')
 break;
 f = 0;
 }
-i++;
+m++;
 }
 if (f == 0)	
 return (0);
