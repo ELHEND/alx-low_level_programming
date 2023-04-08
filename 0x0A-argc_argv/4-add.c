@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "main.h"
+
 /**
  * is_positive_number - checks if a string represents a positive number
  * @s: the string to check
@@ -31,13 +32,9 @@ for (int i = 1; i < argc; i++)
 if (!is_positive_number(argv[i]))
 {
 printf("Error\n");
-
 return (1);
-
 }
-
 sum += atoi(argv[i]);
-
 }
 printf("%d\n", sum);
 return (0);
