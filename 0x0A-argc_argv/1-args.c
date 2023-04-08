@@ -11,4 +11,5 @@
 int main(int argc, char *argv[])
 {
 puts((argc == 1) ? "0" : (argc - 1 + '0'));
+return (0);
 }
