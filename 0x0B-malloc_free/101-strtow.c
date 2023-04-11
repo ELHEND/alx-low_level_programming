@@ -70,8 +70,7 @@ return (words);
 }
 
 int main(void)
-
-{
+int i = 0;
 char *str = " ";
 char **words = strtow(str);
 if (!words)
@@ -79,7 +78,6 @@ if (!words)
 fprintf(stderr, "Memory allocation failed");
 return (1);
 }
-int i = 0;
 while (words[i])
 {
 printf("%s\n", words[i]);
