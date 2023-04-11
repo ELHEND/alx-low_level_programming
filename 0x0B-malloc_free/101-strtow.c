@@ -79,7 +79,7 @@ if (!words)
 fprintf(stderr, "Memory allocation failed");
 return (1);
 }
-
+int i = 0;
 while (words[i])
 {
 printf("%s\n", words[i]);
