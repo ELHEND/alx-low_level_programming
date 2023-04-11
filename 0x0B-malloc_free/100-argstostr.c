@@ -12,9 +12,6 @@
  *NULL on fail.
  */
 
-
-#include <stdlib.h>
-
 char *argstostr(int ac, char **av)
 {
 int total_length = 0;
@@ -28,7 +25,8 @@ for (j = 0; av[i][j] != '\0'; j++)
 total_length++;
 total_length++; /* for space or newline */
 }
-str = malloc(total_length *sizeof(char));
+str = malloc((total_length + 1) * sizeof(char));
+
 if (str == NULL)
 return (NULL);
 
