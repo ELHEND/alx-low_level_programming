@@ -20,7 +20,6 @@ char *argstostr(int ac, char **av)
 int total_length = 0;
 int i, j, position = 0;
 char *str;
-
 if (ac == 0 || av == NULL)
 return (NULL);
 for (i = 0; i < ac; i++)
@@ -29,7 +28,6 @@ for (j = 0; av[i][j] != '\0'; j++)
 total_length++;
 total_length++; /* for space or newline */
 }
-
 str = malloc(total_length *sizeof(char));
 if (str == NULL)
 return (NULL);
