@@ -13,33 +13,37 @@
  */
 
 
+#include <stdlib.h>
+
 char *argstostr(int ac, char **av)
 {
-if (ac == 0 || av == NULL)
-
-{
-return (NULL);
-}
-
 int total_length = 0;
-for (int i = 0; i < ac; i++)
-{
-total_length += strlen(av[i]) + 1; /* Include space for '\n'*/
-}
-char *str = malloc(total_length *sizeof(char));
-if (str == NULL)
-{
+int i, j, position = 0;
+char *str;
+
+if (ac == 0 || av == NULL)
 return (NULL);
-}
-int position = 0;
-for (int i = 0; i < ac; i++)
+for (i = 0; i < ac; i++)
 {
-int length = strlen(av[i]);
-strncpy(str + position, av[i], length);
-position += length;
+for (j = 0; av[i][j] != '\0'; j++)
+total_length++;
+total_length++; /* for space or newline */
+}
+
+str = malloc(total_length *sizeof(char));
+if (str == NULL)
+return (NULL);
+
+for (i = 0; i < ac; i++)
+{
+for (j = 0; av[i][j] != '\0'; j++)
+{
+str[position] = av[i][j];
+position++;
+}
 str[position] = '\n';
 position++;
 }
-str[total_length - 1] = '\0'; /* Replace last '\n' with '\0'*/
 return (str);
 }
+
