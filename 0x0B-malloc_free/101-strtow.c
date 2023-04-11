@@ -2,12 +2,12 @@
 #include <stdlib.h>
 #include <string.h>
 #include "main.h"
-/**
- * strtow - split a string into words
- * @str: input string to split
- * Return: pointer to array of strings
- */
 
+/**
+ * count_words - count the number of words in a string
+ * @str: input string to count words from
+ * Return: number of words in the string
+ */
 int count_words(char *str)
 {
 int count = 0;
@@ -25,9 +25,15 @@ count++;
 }
 str++;
 }
+
 return (count);
 }
 
+/**
+ * strtow - split a string into words
+ * @str: input string to split
+ * Return: pointer to array of strings
+ */
 char **strtow(char *str)
 {
 int i = 0, j = 0;
@@ -63,7 +69,7 @@ words[i] = NULL;
 return (words);
 }
 
-int mai(void)
+int main(void)
 {
 char *str = " ";
 char **words = strtow(str);
@@ -79,8 +85,8 @@ printf("%s\n", words[i]);
 free(words[i]);
 i++;
 }
+			       
 free(words);
 printf("Done.\n");
 return (0);
 }
-
