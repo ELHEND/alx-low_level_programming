@@ -57,7 +57,7 @@ return (NULL);
 strncpy(words[i], str, j);
 words[i][j] = '\0';
 str += j;
-i++
+i++;
 }
 words[i] = NULL;
 return (words);
