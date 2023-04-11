@@ -8,38 +8,58 @@
  * @str: input string to split
  * Return: pointer to array of strings
  */
+
+int count_words(char *str)
+{
+int count = 0;
+int is_word = 0;
+while (*str)
+{
+if (*str == ' ')
+{
+is_word = 0;
+}
+else if (!is_word)
+{
+is_word = 1;
+count++;
+}
+str++;
+}
+return (count);
+}
 char **strtow(char *str)
 {
-char **words = NULL;
-int count = 0, i = 0;
-
-if (str == NULL || *str == '\0')
-return (NULL);
-char *token = strtok(str, " ");
-while (token != NULL)
+int i = 0, j = 0;
+int word_count = count_words(str);
+char **words = malloc((word_count + 1) * sizeof(char *));
+if (!words)
 {
-
-count++;
-token = strtok(NULL, " ");
-}
-words = malloc(sizeof(char *) * (count + 1));
-if (words == NULL)
-return (NULL);
-token = strtok(str, " ");
-while (token != NULL)
-{
-words[i] = strdup(token);
-if (words[i] == NULL)
-{
-for (int j = 0; j < i; j++)
-free(words[j]);
-free(words);
 return (NULL);
 }
-i++;
-token = strtok(NULL, " ");
+while (*str && i < word_count)
+{
+if (*str == ' ')
+{
+str++;
+continue;
 }
-words[count] = NULL;
+j = 0;
+while (str[j] != ' ' && str[j] != '\0')
+{
+j++;
+}
+words[i] = malloc(j + 1);
+if (!words[i])
+{
+return (NULL);
+}
+strncpy(words[i], str, j);
+words[i][j] = '\0';
+str += j;
+i++
+}
+words[i] = NULL;
 return (words);
 }
 
