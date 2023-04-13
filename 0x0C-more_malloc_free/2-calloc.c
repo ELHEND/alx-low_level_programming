@@ -39,6 +39,6 @@ if (o == NULL)
 {
 return (NULL);
 }
-_memset(p, 0, (nmemb * size));
+_memset(o, 0, (nmemb * size));
 return (o);
 }
