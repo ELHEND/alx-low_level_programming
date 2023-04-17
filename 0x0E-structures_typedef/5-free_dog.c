@@ -1,4 +1,3 @@
-#include <assert.h>
 #include "dog.h"
 #include <stdlib.h>
 
@@ -9,9 +8,5 @@
  */
 void free_dog(dog_t *d)
 {
-assert(d != NULL);
-free(d->name);
-free(d->owner);
-free(d);
+d ? free(d->name), free(d->owner), free(d) : 0;
 }
-
