@@ -1,5 +1,4 @@
 #include "function_pointers.h"
-
 /**
  * int_index - earches for an integer
  * @array: array to search in
@@ -11,15 +10,14 @@
  */
 int int_index(int *array, int size, int (*cmp)(int))
 {
-if (array == NULL || cmp == NULL || size <= 0)
-return (-1);
-int m = 0;
-while (m < size)
+int i;
+if (array && cmp)
 {
-if (cmp(*(array + m)) != 0)
-return (m);
-m++;
+for (i = 0; i < size; i++)
+{
+if (cmp(array[i]) != 0)
+return (i);
+}
 }
 return (-1);
 }
-
