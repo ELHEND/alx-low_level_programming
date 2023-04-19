@@ -1,39 +1,37 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
+
 /**
  * main - prints its own opcodes
  * @argc: number of arguments
  * @argv: array of arguments
  * Return: Always 0 (Success)
  */
-
 int main(int argc, char *argv[])
 {
+int bytes, i;
+char *arr;
+
 if (argc != 2)
 {
-printf("Error\nUsage: %s <number of bytes>\n", argv[0]);
-return (1);
+printf("Error\n");
+exit(1);
 }
-int bytes = atoi(argv[1]);
-if (bytes <= 0)
+bytes = atoi(argv[1]);
+if (bytes < 0)
 {
-printf("Error\nNumber of bytes must be positive\n");
-return (1);
+printf("Error\n");
+exit(2);
 }
-unsigned char *code = (unsigned char *)malloc(bytes);
-if (code == NULL)
+arr = (char *)main;
+for (i = 0; i < bytes; i++)
 {
-printf("Error\nFailed to allocate memory\n");
-return (1);
-}
-memcpy(code, (unsigned char *)main, bytes);
-for (int i = 0; i < bytes; i++)
+if (i == bytes - 1)
 {
-printf("%02x ", code[i]);
+printf("%02hhx\n", arr[i]);
+break;
 }
-printf("\n");
-free(code);
+printf("%02hhx ", arr[i]);
+}
 return (0);
 }
-
