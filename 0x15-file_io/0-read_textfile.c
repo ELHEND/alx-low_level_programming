@@ -1,60 +1,52 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "main.h"
+#include <fcntl.h>
+#include <unistd.h>
 
 /**
  * read_textfile - reads a text file and prints it to the POSIX standard output
  * @filename: name of the file to read
  * @letters: number of letters to read and print
- * Return: actual number of letters read and printed, or 0 if filename is NULL,
- * file cannot be opened or read, or letters is 0
+ * Return: actual number of letters read and printed, or 0 on failure
  */
-
-/**
- * main - Entry point
- * This function reads the contents of
- * a text file and prints them to standard output.
- * @argc: The number of arguments passed to the program (should be 1).
- * @argv: An array of strings containing the arguments passed to the program.
- * Return: Always 0 on success.
- */
-int main(int argc, char *argv[])
-{
-const char *filename = "example.txt";
-size_t letters = 100;
-ssize_t n;
-n = read_textfile(filename, letters);
-printf("\nThe actual number of letters read and printed is %ld\n", n);
-return (0);
-}
-
 ssize_t read_textfile(const char *filename, size_t letters)
 {
 	int fd;
-	ssize_t n;
+	ssize_t n_read, n_written;
 	char *buf;
-if (!filename || letters == 0)
-return (0);
+
+	if (filename == NULL)
+		return (0);
+
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
 		return (0);
-	buf = malloc(sizeof(char) * (letters + 1));
-	if (!buf)
-	{
-		close(fd);
+
+	buf = malloc(letters + 1); /* Add space for null terminator */
+	if (buf == NULL)
 		return (0);
-	}
-	n = read(fd, buf, letters);
-	if (n == -1)
+
+	n_read = read(fd, buf, letters);
+	if (n_read == -1)
 	{
-		close(fd);
 		free(buf);
+		close(fd);
 		return (0);
 	}
-	buf[n] = '\0';
-	printf("%s", buf);
-	close(fd);
+
+	buf[n_read] = '\0'; /* Add null terminator */
+
+	n_written = write(STDOUT_FILENO, buf, n_read);
+	if (n_written == -1 || n_written != n_read)
+	{
+		free(buf);
+		close(fd);
+		return (0);
+	}
+
 	free(buf);
-	return (n);
+	close(fd);
+	return (n_written);
 }
 
