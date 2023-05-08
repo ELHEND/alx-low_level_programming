@@ -1,122 +1,104 @@
+#include "main.h"
 #include <stdio.h>
-#include <fcntl.h>
-#include <unistd.h>
 #include <stdlib.h>
-
-#define BUFFER_SIZE 1024
-
-int validate_args(int argc);
-int open_file(const char *file_path, int flags, mode_t mode);
-int copy_fd(int fd_from, int fd_to);
-
+void close_file(int fd);
+char *create_buffer(char *file);
 /**
- *  * validate_args - validates that the number of arguments is correct.
- *   *
- *    * @argc: argument count.
- *     *
- *      * Return: 0 on success, or an error code on failure.
+ *  * create_buffer - Allocates 1024 bytes for a buffer.
+ *   * @file: The name of the file buffer is storing chars for.
+ *    *
+ *     * Return: A pointer to the newly-allocated buffer.
  */
-int validate_args(int argc)
+char *create_buffer(char *file)
 {
-	if (argc != 3)
+	char *buffer;
+
+	buffer = malloc(sizeof(char) * 1024);
+
+	if (buffer == NULL)
 	{
-		fprintf(stderr, "Usage: cp SOURCE DEST\n");
-		return (EXIT_FAILURE);
+		dprintf(STDERR_FILENO,
+				"Error: Can't write to %s\n", file);
+		exit(99);
 	}
 
-	return (EXIT_SUCCESS);
+	return (buffer);
 }
 
 /**
- *  * open_file - opens a file with the given path and flags.
- *   *
- *    * @file_path: path to the file.
- *     * @flags: file opening flags.
- *      * @mode: file permission flags.
+ *  * close_file - Closes file descriptors.
+ *   * @fd: The file descriptor to be closed.
+ */
+void close_file(int fd)
+{
+	int m;
+
+	m = close(fd);
+
+	if (m == -1)
+	{
+		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", fd);
+		exit(100);
+	}
+}
+
+/**
+ *  * main - Copies the contents of a file to another file.
+ *   * @argc: The number of arguments supplied to the program.
+ *    * @argv: An array of pointers to the arguments.
+ *     *
+ *      * Return: 0 on success.
  *       *
- *        * Return: file descriptor on success, or -1 on failure.
- */
-int open_file(const char *file_path, int flags, mode_t mode)
-{
-	int fd;
-
-	fd = open(file_path, flags, mode);
-	if (fd == -1)
-		perror(file_path);
-
-	return (fd);
-}
-
-/**
- *  * copy_fd - copies the content of one file descriptor to another.
- *   *
- *    * @fd_from: source file descriptor.
- *     * @fd_to: destination file descriptor.
- *      *
- *       * Return: 0 on success, or an error code on failure.
- */
-int copy_fd(int fd_from, int fd_to)
-{
-	char buffer[BUFFER_SIZE];
-	ssize_t read_ret, write_ret;
-
-	do {
-		read_ret = read(fd_from, buffer, BUFFER_SIZE);
-		if (read_ret == -1)
-		{
-			perror("read");
-			return (EXIT_FAILURE);
-		}
-
-		write_ret = write(fd_to, buffer, read_ret);
-		if (write_ret == -1 || write_ret != read_ret)
-		{
-			perror("write");
-			return (EXIT_FAILURE);
-		}
-	} while (read_ret > 0);
-
-	return (EXIT_SUCCESS);
-}
-
-/**
- *  * main - entry point.
- *   *
- *    * @argc: number of command-line arguments.
- *     * @argv: array of pointers to command-line arguments.
- *      *
- *       * Return: 0 on success, or an error code on failure.
+ *        * Description: If the argument count is incorrect - exit code 97.
+ *         *              If file_from does not exist
+ *         or cannot be read - exit code 98.
+ *          *              If file_to cannot be created
+ *          or written to - exit code 99.
+ *           *              If file_to or file_from cannot
+ *           be closed - exit code 100.
  */
 int main(int argc, char *argv[])
 {
-	int fd_from, fd_to;
+	int from, to, k, w;
+	char *buffer;
 
-	if (validate_args(argc) == EXIT_FAILURE)
-		return (EXIT_FAILURE);
-
-	fd_from = open_file(argv[1], O_RDONLY, 0);
-	if (fd_from == -1)
-		return (EXIT_FAILURE);
-
-	fd_to = open_file(argv[2], O_WRONLY | O_CREAT | O_TRUNC, 0664);
-	if (fd_to == -1)
+	if (argc != 3)
 	{
-		close(fd_from);
-		return (EXIT_FAILURE);
+		dprintf(STDERR_FILENO, "Usage: cp file_from file_to\n");
+		exit(97);
 	}
 
-	if (copy_fd(fd_from, fd_to) == EXIT_FAILURE)
-	{
-		close(fd_from);
-		close(fd_to);
-		return (EXIT_FAILURE);
-	}
+	buffer = create_buffer(argv[2]);
+	from = open(argv[1], O_RDONLY);
+	k = read(from, buffer, 1024);
+	to = open(argv[2], O_CREAT | O_WRONLY | O_TRUNC, 0664);
 
-	if (close(fd_from) == -1)
-		perror("close");
+	do {
+		if (from == -1 || k == -1)
+		{
+			dprintf(STDERR_FILENO,
+					"Error: Can't read from file %s\n", argv[1]);
+			free(buffer);
+			exit(98);
+		}
 
-	if (close(fd_to) == -1)
-		perror("close");
+		w = write(to, buffer, k);
+		if (to == -1 || w == -1)
+		{
+			dprintf(STDERR_FILENO,
+					"Error: Can't write to %s\n", argv[2]);
+			free(buffer);
+			exit(99);
+		}
 
-	return (EXIT_SUCCESS);
+		k = read(from, buffer, 1024);
+		to = open(argv[2], O_WRONLY | O_APPEND);
+
+	} while (k > 0);
+
+	free(buffer);
+	close_file(from);
+	close_file(to);
+
+	return (0);
 }
