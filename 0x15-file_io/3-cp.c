@@ -94,7 +94,7 @@ int main(int argc, char *argv[])
 	if (validate_args(argc) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 
-	fd_from = open_file(argv[1], O_RDONLY);
+	fd_from = open_file(argv[1], O_RDONLY, 0);
 	if (fd_from == -1)
 		return (EXIT_FAILURE);
 
@@ -119,4 +119,4 @@ int main(int argc, char *argv[])
 		perror("close");
 
 	return (EXIT_SUCCESS);
-
+}
