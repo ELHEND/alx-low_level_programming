@@ -3,7 +3,7 @@
 
 /**
  * jump_search - searches for a value in an array of
- * integers using the Jump search algorithm
+ * integers using Jump search algorithm
  *
  * @array: input array
  * @size: size of the array
@@ -12,13 +12,13 @@
  */
 int jump_search(int *array, size_t size, int value)
 {
-	int index, m, k, prev;
+	int index, m, l, prev;
 
 	if (array == NULL || size == 0)
 		return (-1);
 
 	m = (int)sqrt((double)size);
-	k = 0;
+	l = 0;
 	prev = index = 0;
 
 	do {
@@ -26,9 +26,9 @@ int jump_search(int *array, size_t size, int value)
 
 		if (array[index] == value)
 			return (index);
-		k++;
+		l++;
 		prev = index;
-		index = k * m;
+		index = l * m;
 	} while (index < (int)size && array[index] < value);
 
 	printf("Value found between indexes [%d] and [%d]\n", prev, index);
