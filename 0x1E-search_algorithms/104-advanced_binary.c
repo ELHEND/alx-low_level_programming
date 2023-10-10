@@ -2,8 +2,7 @@
 
 /**
  * rec_search - searches for a value in an array of
- * integers using the Binary search algorithm
- *
+ * integers using  Binary search algorithm
  *
  * @array: input array
  * @size: size of the array
@@ -13,15 +12,15 @@
 int rec_search(int *array, size_t size, int value)
 {
 	size_t half = size / 2;
-	size_t i;
+	size_t m;
 
 	if (array == NULL || size == 0)
 		return (-1);
 
 	printf("Searching in array");
 
-	for (i = 0; i < size; i++)
-		printf("%s %d", (i == 0) ? ":" : ",", array[i]);
+	for (m = 0; m < size; m++)
+		printf("%s %d", (m == 0) ? ":" : ",", array[m]);
 
 	printf("\n");
 
@@ -44,7 +43,7 @@ int rec_search(int *array, size_t size, int value)
 
 /**
  * advanced_binary - calls to rec_search to return
- * the index of the number
+ * the index of  number
  *
  * @array: input array
  * @size: size of the array
